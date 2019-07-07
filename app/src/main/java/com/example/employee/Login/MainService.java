@@ -34,9 +34,10 @@ public class MainService {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse body = response.body();
-                JSONArray jsonElements = getJson(body.getTABLEDATA());
+
 
                 if (response.isSuccessful()) {
+                    JSONArray jsonElements = getJson(body.getTABLEDATA());
                     saveData(jsonElements);
                     Log.e("Data", "" + body.getTABLEDATA());
                     mainPresenter.successfulLogin(progressDialog);

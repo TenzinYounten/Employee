@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         String password = _passwordText.getText().toString();
         if(mainPresenter.validate(user, password)) {
             progressDialog = new ProgressDialog(MainActivity.this,
-                    R.style.AppTheme_Dark_Dialog);
+                    R.style.AppCompatAlertDialogStyle);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Authenticating...");
             progressDialog.show();

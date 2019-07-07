@@ -9,7 +9,7 @@ public class Employee extends RealmObject {
     String place;
     String id;
     String date;
-    String salary;
+    double salary;
 
     public Employee() {
     }
@@ -20,7 +20,7 @@ public class Employee extends RealmObject {
         this.place = stringList.get(2);
         this.id = stringList.get(3);
         this.date = stringList.get(4);
-        this.salary = stringList.get(5).replaceAll("$","");
+        this.salary = Double.valueOf(stringList.get(5).replaceAll("[-+.^:,$]",""));
 
     }
 
@@ -64,11 +64,11 @@ public class Employee extends RealmObject {
         this.date = date;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }

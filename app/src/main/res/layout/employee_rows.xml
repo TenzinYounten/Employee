@@ -17,43 +17,44 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:paddingBottom="5dp"
             style="@style/TextAppearance.AppCompat.Medium"
             android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@color/lightblue"
             android:text="Name  "
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tvReleaseDate"
+            android:id="@+id/role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Medium"
             android:fontFamily="sans-serif-condensed-medium"
-            android:layout_below="@+id/tvTitle"
-            android:text="Ph : " />
+            android:layout_below="@+id/name"
+            android:text="Role : " />
         <TextView
-            android:id="@+id/tvOverView"
+            android:id="@+id/place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvReleaseDate"
+            android:layout_below="@+id/role"
             style="@style/TextAppearance.AppCompat.Medium"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Ph. : " />
+            android:text="Place : " />
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="145dp"
+        <TextView
+            android:id="@+id/salary"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvReleaseDate"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="200dp"
-            android:layout_toRightOf="@id/tvOverView"
-            android:gravity="center"
-            android:text="Delete" />
+            android:layout_below="@+id/place"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Salary : " />
+
+
        <!-- <Button
             android:id="@+id/view"
             android:layout_width="145dp"
