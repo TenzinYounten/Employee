@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,7 +15,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,9 +23,10 @@ import android.widget.Toast;
 import com.example.employee.BuildConfig;
 import com.example.employee.Model.Employee;
 import com.example.employee.R;
-import com.example.employee.Util.ActivityUtil;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +85,9 @@ public class EmployeeViewActivity extends AppCompatActivity implements EmployeeV
         employeeViewPresenter.setRole(role);
         employeeViewPresenter.setSalary(salary);
         employeeViewPresenter.setDate(date);
-
+        if(employee.getUri() != null) {
+            employeeViewPresenter.setImage(imageView, employee.getUri());
+        }
         super.onResume();
     }
 
@@ -120,6 +123,8 @@ public class EmployeeViewActivity extends AppCompatActivity implements EmployeeV
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 imageView.setImageURI(file);
+                employeeViewPresenter.saveImageFile(file, employeeName,this);
+
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
             }
@@ -151,5 +156,17 @@ public class EmployeeViewActivity extends AppCompatActivity implements EmployeeV
     @Override
     public void setDate(TextView date) {
         date.setText(employee.getDate());
+    }
+
+    @Override
+    public void setImageView(ImageView imageView, String uri) {
+        try {
+            File file = new File(new URI(uri));
+            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            imageView.setImageBitmap(myBitmap);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
     }
 }

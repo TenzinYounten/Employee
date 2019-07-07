@@ -10,6 +10,7 @@ public class Employee extends RealmObject {
     String id;
     String date;
     double salary;
+    String uri;
 
     public Employee() {
     }
@@ -21,7 +22,14 @@ public class Employee extends RealmObject {
         this.id = stringList.get(3);
         this.date = stringList.get(4);
         this.salary = Double.valueOf(stringList.get(5).replaceAll("[-+.^:,$]",""));
+    }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getName() {

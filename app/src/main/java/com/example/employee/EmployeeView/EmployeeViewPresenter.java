@@ -1,7 +1,9 @@
 package com.example.employee.EmployeeView;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.employee.Model.Employee;
@@ -63,5 +65,29 @@ public class EmployeeViewPresenter {
 
     public void setDate(TextView date) {
         employeeView.setDate(date);
+    }
+
+    public void saveImageFile(Uri file, String employeeName, EmployeeViewActivity employeeViewActivity) {
+        Realm realm = null;
+        Employee employee = null;
+        Realm.init(employeeViewActivity);
+        try {
+            realm = Realm.getDefaultInstance();
+            employee = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
+            if (employee != null) {
+                employee.setUri(file.getPath());
+                realm.beginTransaction();
+                realm.copyToRealmOrUpdate(employee);
+                realm.commitTransaction();
+
+            }
+        } catch (Exception e) {
+
+            Log.e("Exception", "" + e.toString());
+        }
+    }
+
+    public void setImage(ImageView imageView, String uri) {
+        employeeView.setImageView(imageView, uri);
     }
 }

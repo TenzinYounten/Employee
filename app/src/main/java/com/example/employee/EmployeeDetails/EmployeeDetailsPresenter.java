@@ -39,7 +39,7 @@ class EmployeeDetailsPresenter {
             Employee tempEmployee = new Employee();
             tempEmployee.setSalary(employee.getSalary());
             tempEmployee.setRole(employee.getRole());
-            tempEmployee.setPlace(employee.getRole());
+            tempEmployee.setPlace(employee.getPlace());
             tempEmployee.setName(employee.getName());
             tempEmployee.setId(employee.getId());
             tempEmployee.setDate(employee.getDate());

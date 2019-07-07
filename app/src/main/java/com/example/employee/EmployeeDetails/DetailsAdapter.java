@@ -53,9 +53,10 @@ class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.EmployeeHolder>
     @Override
     public void onBindViewHolder(@NonNull EmployeeHolder viewHolder, int i) {
         viewHolder.name.setText("" + employees.get(i).getName());
-        viewHolder.role.setText("" + employees.get(i).getDate());
+        viewHolder.role.setText("" + employees.get(i).getRole());
         viewHolder.place.setText("" + employees.get(i).getPlace());
         viewHolder.salary.setText("" + employees.get(i).getSalary());
+        viewHolder.date.setText("" + employees.get(i).getDate());
         viewHolder.id = employees.get(i).getId();
     }
 
@@ -103,7 +104,7 @@ class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.EmployeeHolder>
 
 
     public class EmployeeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView name, role, place, salary;
+        TextView name, role, place, salary, date;
         Button button;
         String id;
 
@@ -111,9 +112,10 @@ class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.EmployeeHolder>
         public EmployeeHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
-            role = (TextView) itemView.findViewById(R.id.place);
-            place = (TextView) itemView.findViewById(R.id.role);
+            place = (TextView) itemView.findViewById(R.id.place);
+            role = (TextView) itemView.findViewById(R.id.role);
             salary = (TextView) itemView.findViewById(R.id.salary);
+            date = (TextView) itemView.findViewById(R.id.date);
             itemView.setTag(itemView);
             itemView.setOnClickListener(this);
         }
