@@ -33,8 +33,8 @@ public class MainPresenter {
 
     }
 
-    public void login(String user, String password, ProgressDialog progressDialog) {
-        mainService.doLogin(user, password, this, progressDialog);
+    public void login(String user, String password, ProgressDialog progressDialog, String firstLogin) {
+        mainService.doLogin(user, password, this, progressDialog,firstLogin);
       /*  if(b) {
             mainView.goToMainPage();
         } else {

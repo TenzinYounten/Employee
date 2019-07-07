@@ -32,7 +32,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements Employ
     DetailsAdapter detailsAdapter;
 
     RealmResults<Employee> results;
-    List<Employee> finalEmployees;
+    List<Employee> finalEmployee;
     SearchView searchView;
     RecyclerView recyclerView;
     CardView cardView;
@@ -64,7 +64,8 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements Employ
 
     @Override
     public void onClick(View view, int position) {
-        new ActivityUtil(this).startDetailActivity();
+        Employee employee = finalEmployee.get(position);
+        new ActivityUtil(this).startDetailActivity(employee);
     }
 
     @Override
@@ -92,6 +93,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements Employ
 
     @Override
     public void displayEmployees(List<Employee> finalEmployees) {
+        finalEmployee = finalEmployees;
         detailsAdapter = new DetailsAdapter(finalEmployees, getApplicationContext());
         detailsAdapter.setClickListener(this);
         recyclerView.setAdapter(detailsAdapter);

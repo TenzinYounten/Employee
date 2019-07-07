@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
 public class MainService {
     Realm realm;
 
-    public void doLogin(String user, String password, MainPresenter mainPresenter, ProgressDialog progressDialog) {
+    public void doLogin(String user, String password, MainPresenter mainPresenter, ProgressDialog progressDialog, String firstLogin) {
         Retrofit retrofit = NetworkClient.getRetrofit();
 
         EndPointInterface endPointInterface = retrofit.create(EndPointInterface.class);
@@ -37,9 +37,11 @@ public class MainService {
 
 
                 if (response.isSuccessful()) {
-                    JSONArray jsonElements = getJson(body.getTABLEDATA());
-                    saveData(jsonElements);
-                    Log.e("Data", "" + body.getTABLEDATA());
+                    if(!firstLogin.equalsIgnoreCase("Y")) {
+                        JSONArray jsonElements = getJson(body.getTABLEDATA());
+                        saveData(jsonElements);
+                        Log.e("Data", "" + body.getTABLEDATA());
+                    }
                     mainPresenter.successfulLogin(progressDialog);
                 } else {
                     mainPresenter.unSuccessfulLogin(progressDialog);

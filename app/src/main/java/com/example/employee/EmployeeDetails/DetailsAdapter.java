@@ -23,18 +23,18 @@ class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.EmployeeHolder>
     List<Employee> filteredEmployee;
     List<Employee> tempEmployee;
     private ItemClickListener clickListener;
-
-    public void setClickListener(EmployeeDetailsActivity employeeDetailsActivity) {
-
-    }
-
     public interface ItemClickListener {
         void onClick(View view, int position);
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
     }
 
     public interface OnItemClickListener {
         void onItemClick(Long id);
     }
+
     public DetailsAdapter(List<Employee> finalEmployees, Context applicationContext) {
         this.context = applicationContext;
         this.employees = finalEmployees;

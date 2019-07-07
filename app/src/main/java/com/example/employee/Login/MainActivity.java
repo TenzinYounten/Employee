@@ -1,6 +1,8 @@
 package com.example.employee.Login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void doLogin(View view) {
+        SharedPreferences login = this.getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String firstLogin = login.getString("login", "");
+
         String user = userText.getText().toString();
         String password = _passwordText.getText().toString();
         if(mainPresenter.validate(user, password)) {
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Authenticating...");
             progressDialog.show();
-            mainPresenter.login(user,password,progressDialog);
+            mainPresenter.login(user,password,progressDialog,firstLogin);
         }
 
     }
@@ -63,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void goToMainPage(ProgressDialog progressDialog) {
+        SharedPreferences login = this.getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = login.edit();
+        editor.putString("login", "Y");
+        editor.commit();
         progressDialog.dismiss();
         new ActivityUtil(this).startMainActivity();
     }
