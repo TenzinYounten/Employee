@@ -86,6 +86,7 @@ public class EmployeeViewActivity extends AppCompatActivity implements EmployeeV
         employeeViewPresenter.setSalary(salary);
         employeeViewPresenter.setDate(date);
         if(employee.getUri() != null) {
+            file = FileProvider.getUriForFile(EmployeeViewActivity.this, BuildConfig.APPLICATION_ID + ".provider",getOutputMediaFile());
             employeeViewPresenter.setImage(imageView, employee.getUri());
         }
         super.onResume();
@@ -161,10 +162,11 @@ public class EmployeeViewActivity extends AppCompatActivity implements EmployeeV
     @Override
     public void setImageView(ImageView imageView, String uri) {
         try {
-            File file = new File(new URI(uri));
-            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            imageView.setImageBitmap(myBitmap);
-        } catch (URISyntaxException e) {
+            if(!file.getPath().equalsIgnoreCase("")) {
+                imageView.setImageURI(file);
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

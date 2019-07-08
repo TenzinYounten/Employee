@@ -37,6 +37,7 @@ public class EmployeeViewPresenter {
                 employee1.setRole(employee.getRole());
                 employee1.setDate(employee.getDate());
                 employee1.setSalary(employee.getSalary());
+                employee1.setUri(employee.getUri());
                 return employee1;
             }
         } catch (Exception e) {
@@ -69,18 +70,35 @@ public class EmployeeViewPresenter {
 
     public void saveImageFile(Uri file, String employeeName, EmployeeViewActivity employeeViewActivity) {
         Realm realm = null;
-        Employee employee = null;
-        Realm.init(employeeViewActivity);
-        try {
-            realm = Realm.getDefaultInstance();
-            employee = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
-            if (employee != null) {
-                employee.setUri(file.getPath());
-                realm.beginTransaction();
-                realm.copyToRealmOrUpdate(employee);
-                realm.commitTransaction();
+        final Employee employee;
+        Employee employee1;
+//        Realm.init(employeeViewActivity);
 
-            }
+        realm = Realm.getDefaultInstance();
+
+        try {
+            realm.beginTransaction();
+            employee = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
+            employee.setUri(file.getPath());
+            realm.commitTransaction();
+
+
+           /* employee = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override    public void execute(Realm realm) {
+                    try {
+                        employee.setUri(file.getPath());
+                        // the listObject has contain updated data in the List
+                        realm.copyToRealmOrUpdate(employee);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });*/
+            employee1 = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
+            employee1 = realm.where(Employee.class).equalTo("name", employeeName).findFirst();
+
         } catch (Exception e) {
 
             Log.e("Exception", "" + e.toString());
